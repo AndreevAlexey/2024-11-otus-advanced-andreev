@@ -2,7 +2,6 @@ package ru.otus.model;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractCache<T> {

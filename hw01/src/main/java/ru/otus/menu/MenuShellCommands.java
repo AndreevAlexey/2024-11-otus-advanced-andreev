@@ -45,7 +45,7 @@ public class MenuShellCommands {
     public String getFileFromByteCache(String filename) {
         try {
             if (!fileByteCacheService.isCached(filename)) {
-                return "File not cached!";
+                fileByteCacheService.addFileToCache(filename);
             }
             byte[] bytes = fileByteCacheService.getFromCache(filename);
             System.out.println(new String(bytes));
@@ -85,7 +85,7 @@ public class MenuShellCommands {
     public String getFileFromTextCache(String filename) {
         try {
             if (!textFileCacheService.isCached(filename)) {
-                return "File not cached!";
+                textFileCacheService.addFileToCache(filename);
             }
             textFileCacheService.getFromCache(filename).forEach(System.out::println);
             return "successful";

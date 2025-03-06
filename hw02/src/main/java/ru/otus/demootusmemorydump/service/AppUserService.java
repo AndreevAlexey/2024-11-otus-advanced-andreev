@@ -7,10 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.demootusmemorydump.model.AppUser;
 import ru.otus.demootusmemorydump.repository.AppUserRepository;
 
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor

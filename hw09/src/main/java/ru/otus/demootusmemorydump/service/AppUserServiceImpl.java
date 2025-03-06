@@ -10,9 +10,7 @@ import ru.otus.demootusmemorydump.exception.AppException;
 import ru.otus.demootusmemorydump.model.AppUser;
 import ru.otus.demootusmemorydump.repository.AppUserRepository;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 
 @Slf4j

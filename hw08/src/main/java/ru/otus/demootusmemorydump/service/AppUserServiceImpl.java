@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppUserServiceImpl implements AppUserService {
 
+
     private final AppUserRepository appUserRepository;
 
     private final DigestUtils hexer = new DigestUtils("SHA-512");
@@ -50,18 +51,13 @@ public class AppUserServiceImpl implements AppUserService {
     @Transactional
     public AppUser save(AppUser item) {
         try {
-            synchronized (hexer) {
-                String hexPassword = getHex(item.getPassword());
-                item.setPassword(hexPassword);
+            String hexPassword = getHex(item.getPassword());
+            item.setPassword(hexPassword);
 
-                AppUser newUser = appUserRepository.save(item);
-                log.info("Registered user = %s".formatted(newUser.getUsername()));
+            AppUser newUser = appUserRepository.save(item);
+            log.info("Registered user = %s".formatted(newUser.getUsername()));
 
-                appUserRepository.findAll();
-
-                return newUser;
-            }
-
+            return newUser;
         } catch (Exception exp) {
             log.error(exp.getMessage());
             throw new AppException(exp.getMessage());
@@ -69,13 +65,8 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
 
-    private String getHex(String value) {
-        try {
-            String result = hexer.digestAsHex(value);
-            throw new AppException("Wrong exception");
-        } catch (AppException exp) {
-            return hexer.digestAsHex(value);
-        }
+    private synchronized String getHex(String value) {
+        return hexer.digestAsHex(value);
     }
 
 }

@@ -100,7 +100,7 @@ public class Main {
 
         Summariser summer = null;
         String summariserName = JMeterUtils.getPropDefault("summariser.name", "summary");
-        if (summariserName.length() > 0) {
+        if (!summariserName.isEmpty()) {
             summer = new Summariser(summariserName);
         }
         ResultCollector logger = new ResultCollector(summer);

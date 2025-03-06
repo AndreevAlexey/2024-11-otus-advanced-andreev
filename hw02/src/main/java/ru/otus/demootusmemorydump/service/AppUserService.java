@@ -20,8 +20,6 @@ public class AppUserService {
 
     private final AppUserRepository appUserRepository;
 
-    private static final Map<String, String> userMap = new HashMap<>();
-
 
     public List<AppUser> getAll() {
         return appUserRepository.findAll();
@@ -31,7 +29,6 @@ public class AppUserService {
     public AppUser insert(String username, String password) {
         AppUser newUser = new AppUser(0, username, password);
         newUser =  appUserRepository.save(newUser);
-        userMap.put(username, password);
         return newUser;
     }
 

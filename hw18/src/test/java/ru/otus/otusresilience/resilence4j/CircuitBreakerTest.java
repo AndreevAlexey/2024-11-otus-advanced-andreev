@@ -20,10 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CircuitBreakerTest {
 
-    private static final HttpStatus OK = HttpStatus.OK;
-
-    private static final HttpStatus ERROR = HttpStatus.TOO_MANY_REQUESTS;
-
     @Autowired
     private TestRestTemplate testRestTemplate;
 
@@ -45,14 +41,10 @@ public class CircuitBreakerTest {
         var responses = new CopyOnWriteArrayList<ResponseEntity<String>>();
 
         IntStream.rangeClosed(1, numberSuccessfulFirst)
-                .forEach(n -> {
-                    responses.add(testRestTemplate.getForEntity(url, String.class));
-                });
+                .forEach(n -> responses.add(testRestTemplate.getForEntity(url, String.class)));
 
         IntStream.rangeClosed(1, numberNotSuccessful)
-                .forEach(n -> {
-                    responses.add(testRestTemplate.getForEntity(url, String.class));
-                });
+                .forEach(n -> responses.add(testRestTemplate.getForEntity(url, String.class)));
 
         assertEquals(numberSuccessfulFirst + numberNotSuccessful, responses.size());
         assertEquals(numberSuccessfulFirst,

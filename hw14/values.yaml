@@ -1,0 +1,11 @@
+appname: otus-helm-backend
+tier: backend
+protocol: TCP
+port: 8080
+nodePort: 30001
+type: NodePort
+replicas: 1
+image:
+  repository: 127.0.0.1:5000/otus-app
+  tag: latest
+  pullPolicy: Always
